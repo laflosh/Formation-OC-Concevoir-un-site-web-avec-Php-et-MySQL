@@ -1,39 +1,63 @@
+<?php
+    $recettes = [
+        [
+            "titreRecette" => "Poulet Tikka Masala",
+            "auteurRecette" => "Emma Dupont"
+        ],
+        [
+            "titreRecette" => "Tarte Tatin aux Pommes",
+            "auteurRecette" => "Lucas Martin"
+        ],
+        [
+            "titreRecette" => "Spaghetti Carbonara",
+            "auteurRecette" => "Sophia Rodriguez"
+        ],
+        [
+            "titreRecette" => "Chili Con Carne",
+            "auteurRecette" => "Antoine Leroy"
+        ]
+    ];
+?>
+
 <!DOCTYPE html>
 
 <html>
 
     <head>
 
-        <title>Ceci est une page de test avec des balises PHP</title>
-        <meta charset="utf-8" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Affichage des recettes</title>
 
     </head>
     
     <body>
 
-        <h2>Page de test</h2>
+        <h1>Recettes</h1>
         
         <p>
-            Cette page contient du code HTML avec des balises PHP.<br />
-            <?php 
-                echo("Celle-ci a été entiérement écrite en PHP.<br/>");
-            ?>
-            Voici quelques petits tests :
-            Aujourd'hui nous sommes le <?php echo date("d/m/y h:i:s")?>
+            Retrouver toutes nos recettes de cuisines.<br />
         </p>
-        
+
         <ul>
 
-            <li style="color: blue;">Texte en bleu</li>
-            <li style="color: red;">Texte en rouge</li>
-            <li style="color: green;">Texte en vert</li>
+            <?php 
+                for($counter = 0; $counter < count($recettes); $counter++):
+            ?>
+
+            <li>
+
+                <h2><?php echo $recettes[$counter]["titreRecette"]?></h2>
+                <p><?php echo $recettes[$counter]["auteurRecette"]?></p>
+
+            </li>
+
+            <?php
+                endfor; 
+            ?>
 
         </ul>
-        
-        <?php
-        /* Encore du PHP
-        Toujours du PHP */
-        ?>
 
     </body>
 
