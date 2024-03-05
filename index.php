@@ -2,29 +2,97 @@
     $recettes = [
         [
             "titreRecette" => "Poulet Tikka Masala",
-            "auteurRecette" => "Emma Dupont",
+            "auteurRecette" => "emma.dupont@test.fr",
             "recette" => "Etape 1: ...",
             "disponible" => true
         ],
         [
             "titreRecette" => "Tarte Tatin aux Pommes",
-            "auteurRecette" => "Lucas Martin",
+            "auteurRecette" => "lucas.martin@test.fr",
             "recette" => "Etape 1: ...",
             "disponible" => true
         ],
         [
             "titreRecette" => "Spaghetti Carbonara",
-            "auteurRecette" => "Sophia Rodriguez",
+            "auteurRecette" => "sophia.rodriguez@test.fr",
             "recette" => "Etape 1: ...",
             "disponible" => false
         ],
         [
             "titreRecette" => "Chili Con Carne",
-            "auteurRecette" => "Antoine Leroy",
+            "auteurRecette" => "antoine.leroy@test.fr",
             "recette" => "Etape 1: ...",
             "disponible" => true
         ]
     ];
+
+    $users = [
+        [
+            "fullname" => "Emma Dupont",
+            "email" => "emma.dupont@test.fr",
+            "age" => 25,
+        ],
+        [
+            "fullname" => "Lucas Martin",
+            "email" => "lucas.martin@test.fr",
+            "age" => 29,
+        ],
+        [
+            "fullname" => "Sophia Rodriguez",
+            "email" => "sophia.rodriguez@test.fr",
+            "age" => 33,
+        ],
+        [
+            "fullname" => "Antoine Leroy",
+            "email" => "antoine.leroy@test.fr",
+            "age" => 23,
+        ]
+    ];
+
+    function isValidRecipe(array $recipe) : bool
+    {
+        if(array_key_exists("disponible", $recipe)){
+
+        $isEnibled = $recipe["disponible"];
+
+        } else {
+
+            $isEnibled = false;
+        
+        }
+
+        return $isEnibled;
+    }
+
+    function getRecipes(array $recipes) : array
+    {
+        $validRecipes = [];
+
+        foreach($recipes as $recipe){
+            if(isValidRecipe($recipe)){
+
+                $validRecipes[] = $recipe;
+
+            }
+        }
+
+        return $validRecipes;
+    }
+
+    function displayAuthor (string $authorEmail, array $users) : string 
+    {
+
+        foreach($users as $user) {
+
+            if($authorEmail === $user["email"]) {
+
+                return $user["fullname"] . '(' . $user["age"] . 'ans)';
+
+            }
+
+        }
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,25 +123,19 @@
             </p>
 
 
-            <?php 
+            <?php foreach(getRecipes($recettes) as $recette) : ?>
+    
+                <article>
 
-                for($counter = 0; $counter < count($recettes); $counter++){
+                    <h2> <?php echo $recette["titreRecette"] ?> </h2>
+    
+                    <div> <?php echo $recette["recette"] ?></div>
+                    <i> <?php echo displayAuthor($recette["auteurRecette"] , $users) ?> </i>
 
-                    $disponible = $recettes[$counter]["disponible"];
+                </article>
 
-                    if($disponible){
-                        echo ("            
-                        <article>
 
-                            <h2>{$recettes[$counter]["titreRecette"]}</h2>
-            
-                            <div>{$recettes[$counter]["recette"]}</div>
-                            <i>{$recettes[$counter]["auteurRecette"]}</i>
-        
-                        </article>");
-                    };
-                };
-            ?>
+            <?php endforeach?>
 
         </div>
 
