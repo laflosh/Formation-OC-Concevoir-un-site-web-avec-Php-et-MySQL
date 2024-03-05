@@ -46,5 +46,22 @@
         return "Auteur inconnu";
 
     }
-    
+
+    function urlParamExist()
+    {
+        $getdata = $_GET;
+
+        if(
+            !isset($getdata["email"]) 
+            || !filter_var($getdata["email"], FILTER_VALIDATE_EMAIL)
+            || empty($getdata["message"])
+            || trim($getdata["message"]) === ""
+            ) {
+
+            return false;
+        }
+
+        return true;
+
+    }
 ?>
