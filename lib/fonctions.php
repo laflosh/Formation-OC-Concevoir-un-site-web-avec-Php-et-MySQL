@@ -72,47 +72,73 @@
 
     function checkFile()
     {
-
+        $file = $_FILES["screenshot"];
         // Testons si le fichier a bien été envoyé et s'il n'y a pas des erreurs
-        if (isset($_FILES["screenshot"]) && $_FILES["screenshot"]["error"] == 0) {
+        if (isset($file) && $file["error"] == 0) {
 
-            // Testons, si le fichier est trop volumineux
-            if ($_FILES["screenshot"]["size"] > 1000000) {
+            checkSizeFile($file);
 
-                echo "L'envoie n'a pas pu être effectué, erreur ou image trop volumineuse";
-                return;
+            checkExtensionFile($file);
 
-            }
+            $path = checkDirUploadsExist($file);
+            
+            $pathImg = saveFile($file, $path);
 
-            //  // Testons, si l'extension n'est pas autorisée
-            // $fileinfo = pathinfo($_FILES["screenshot"]["name"]);
-            // $extension = $fileinfo["extension"];
-            // $allowExtension = ["jpg", "jpeg", "gif", "png"];
-
-            // if (!in_array($extension, $allowExtension)) {
-
-            //     echo "L'envoie du fichier n'a pas pu être effectué, l'extension {$extension} n'est pas autorisé";
-            //     return;
-            // }
-
-            //Testons, si le dossier uploads est manquant
-            $path = dirname(__DIR__).'/uploads/';
-            if (!is_dir($path)) {
-
-                echo "L'envoi n'a pas pu être effectué, le dossier uploads est manquant";
-                return;
-
-            }
-
-            // On peut valider le fichier et le stocker définitivement
-            $pathImg = $path . basename($_FILES['screenshot']['name']);
-            move_uploaded_file($_FILES['screenshot']['tmp_name'], $pathImg);
-
-            $showImg = "uploads/" . basename($_FILES['screenshot']['name']);
-
-            return $showImg;
+            return $pathImg;
 
         }
 
+    }
+
+    // Testons, si le fichier est trop volumineux
+    function checkSizeFile ($file) 
+    {
+
+        if ($file["size"] > 1000000) {
+
+            echo "L'envoie n'a pas pu être effectué, erreur ou image trop volumineuse";
+            return;
+
+        }
+
+    }
+    
+    // Testons, si l'extension n'est pas autorisée
+    function checkExtensionFile($file)
+    {
+        $fileinfo = pathinfo($file["name"]);
+        $extension = $fileinfo["extension"];
+        $allowExtension = ["jpg", "jpeg", "gif", "png"];
+
+        if (!in_array($extension, $allowExtension)) {
+
+            echo "L'envoie du fichier n'a pas pu être effectué, l'extension {$extension} n'est pas autorisé";
+            return;
+        }
+    }
+
+    //Testons, si le dossier uploads est manquant
+    function checkDirUploadsExist($file)
+    {
+
+        $path = dirname(__DIR__).'/uploads/';
+        if (!is_dir($path)) {
+
+            echo "L'envoi n'a pas pu être effectué, le dossier uploads est manquant";
+            return;
+
+        }
+
+        return $path;
+
+    }
+
+    //Valider le fichier et le stocker définitivement
+    function saveFile($file, $path)
+    {
+        $savePath = $path . basename($file['name']);
+        move_uploaded_file($file['tmp_name'], $savePath);
+
+        return "uploads/" . basename($file['name']);
     }
 ?>
