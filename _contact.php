@@ -21,7 +21,7 @@
 
         <h1>Contactez nous</h1>
 
-        <form action="_submitContact.php" method="GET">
+        <form action="_submitContact.php" method="POST" enctype="multipart/form-data">
 
             <div class="mb-3">
 
@@ -38,6 +38,13 @@
 
                 <label for="message" class="form-label">Votre message</label>
                 <textarea class="form-control" placeholder="Exprimez vous" id="message" name="message"></textarea>
+
+            </div>
+
+            <div>
+
+                <label for="screenshot" class="form-label">Votre capture d'écran</label>
+                <input type="file" class="form-control" id="screenshot" name="screenshot"/>
 
             </div>
 

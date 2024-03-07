@@ -1,5 +1,6 @@
 <?php
 
+    //Recettes enregistrées
     $recettes = [
         [
             "titre" => "Poulet Tikka Masala",
@@ -27,6 +28,7 @@
         ]
     ];
 
+    //Informations utilisateurs inscrits
     $users = [
         [
             "fullname" => "Emma Dupont",
@@ -49,5 +51,5 @@
             "age" => 23,
         ]
     ];
-    
+
 ?>
