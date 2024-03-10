@@ -1,19 +1,15 @@
-<?php 
-    require_once(__DIR__."/lib/variables.php");
-    require_once(__DIR__."/lib/fonctions.php");
-    $loggedUser = loginUser($users);
-    $errorMessage = errorMessage($loggedUser);
-?>
+<?php if(!isset($_SESSION["LOGGED_USER"])) { ?>
 
-<?php if(!isset($loggedUser)) { ?>
+    <form action="_submit_login.php" method="POST">
 
-    <form action="index.php" method="POST">
-
-        <?php if(isset($errorMessage)) { ?>
+        <?php if(isset($_SESSION["LOGIN_ERROR_MESSAGE"])) { ?>
 
             <div class="alert alert-danger" role="alert">
 
-                <?php echo $errorMessage; ?>
+                <?php 
+                echo $_SESSION["LOGIN_ERROR_MESSAGE"]; 
+                unset($_SESSION["LOGIN_ERROR_MESSAGE"]);
+                ?>
 
             </div>
 
@@ -41,7 +37,7 @@
 <?php } else { ?>
 
     <div class="alert alert-success" role="alert">
-        Bonjour <?php echo $loggedUser["email"]; ?> et bienvenue sur le site !
+        Bonjour <?php echo $_SESSION["LOGGED_USER"]["email"]; ?> et bienvenue sur le site !
     </div>
 
 <?php } ?>

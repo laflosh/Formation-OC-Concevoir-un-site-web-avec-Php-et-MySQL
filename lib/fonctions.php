@@ -146,57 +146,10 @@
         return "uploads/" . basename($file['name']);
     }
 
-    //Validation du formulaire de connexion
-    function loginUser($users)
+    //Redirection après connexion
+    function redirectToUrl($url)
     {
-        $postData = $_POST;
-
-        if(isset($postData["email"]) && isset($postData["password"])) {
-
-            foreach($users as $user) {
-                if(
-                    $user["email"] === $postData["email"] &&
-                    $user["password"] === $postData["password"]
-                ) {
-
-                    $loggedUser = ["email" => $user["email"]];
-
-                    return $loggedUser;
-
-                }
-
-            }
-
-        }
-
-    }
-
-
-    function errorMessage($loggedUser)
-    {
-        $postData = $_POST;
-
-        if(isset($postData["email"]) && isset($postData["password"])){
-
-            if(!filter_var($postData["email"], FILTER_VALIDATE_EMAIL)) {
-
-                $errorMessage = "Il faut un email valide pour soumettre le formulaire.";
-                return $errorMessage;
-
-            } 
-
-            if(!isset($loggedUser)) {
-
-                $errorMessage = sprintf(
-                    'les Informations envoyées ne permettent pas de vous indentifier : (%s/%s)',
-                    $postData["email"],
-                    strip_tags($postData["password"])
-                );
-
-                return $errorMessage;
-            }
-            
-        }
-
+        header("location: {$url}");
+        exit();
     }
 ?>

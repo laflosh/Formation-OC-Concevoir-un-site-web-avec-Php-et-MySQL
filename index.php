@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__."/lib/variables.php");
 require_once(__DIR__."/lib/fonctions.php");
 ?>
@@ -34,21 +35,17 @@ require_once(__DIR__."/lib/fonctions.php");
             <!--Formulaire de connexion-->
             <?php require_once(__DIR__."/_login.php")?>
 
-            <?php if(isset($loggedUser)){ ?>
+            <?php foreach(getRecipes($recettes) as $recette) { ?>
+    
+                <article>
 
-                <?php foreach(getRecipes($recettes) as $recette) { ?>
-        
-                    <article>
+                    <h2> <?php echo $recette["titre"] ?> </h2>
+    
+                    <div> <?php echo $recette["recette"] ?></div>
+                    <i> <?php echo displayAuthor($recette["auteur"] , $users) ?> </i>
 
-                        <h2> <?php echo $recette["titre"] ?> </h2>
-        
-                        <div> <?php echo $recette["recette"] ?></div>
-                        <i> <?php echo displayAuthor($recette["auteur"] , $users) ?> </i>
+                </article>
 
-                    </article>
-
-
-                <?php } ?>
 
             <?php } ?>
 
