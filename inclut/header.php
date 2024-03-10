@@ -24,6 +24,14 @@
                         <a class="nav-link" href="_contact.php">Contact</a>
                     </li>
 
+                    <?php if (isset($_SESSION['LOGGED_USER'])) { ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="_logout.php">Déconnexion</a>
+                    </li>
+
+                    <?php } ?>
+
                 </ul>
 
             </div>
