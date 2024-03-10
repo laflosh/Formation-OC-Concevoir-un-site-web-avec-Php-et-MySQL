@@ -2,7 +2,7 @@
     require_once(__DIR__."/lib/variables.php");
     require_once(__DIR__."/lib/fonctions.php");
     $loggedUser = loginUser($users);
-    $errorMessage = loginUser($users);
+    $errorMessage = errorMessage($loggedUser);
 ?>
 
 <?php if(!isset($loggedUser)) { ?>

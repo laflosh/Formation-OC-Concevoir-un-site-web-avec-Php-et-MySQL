@@ -152,28 +152,38 @@
         $postData = $_POST;
 
         if(isset($postData["email"]) && isset($postData["password"])) {
-            if(!filter_var($postData["email"], FILTER_VALIDATE_EMAIL)) {
 
-                $errorMessage = "Il faut un email valide pour soumettre le formulaire.";
-                return;
+            foreach($users as $user) {
+                if(
+                    $user["email"] === $postData["email"] &&
+                    $user["password"] === $postData["password"]
+                ) {
 
-            } else {
+                    $loggedUser = ["email" => $user["email"]];
 
-                foreach($users as $user) {
-                    if(
-                        $user["email"] === $postData["email"] &&
-                        $user["password"] === $postData["password"]
-                    ) {
-
-                        $loggedUser = ["email" => $user["email"]];
-
-                        return $loggedUser;
-
-                    }
+                    return $loggedUser;
 
                 }
 
             }
+
+        }
+
+    }
+
+
+    function errorMessage($loggedUser)
+    {
+        $postData = $_POST;
+
+        if(isset($postData["email"]) && isset($postData["password"])){
+
+            if(!filter_var($postData["email"], FILTER_VALIDATE_EMAIL)) {
+
+                $errorMessage = "Il faut un email valide pour soumettre le formulaire.";
+                return $errorMessage;
+
+            } 
 
             if(!isset($loggedUser)) {
 
@@ -185,7 +195,7 @@
 
                 return $errorMessage;
             }
-
+            
         }
 
     }
