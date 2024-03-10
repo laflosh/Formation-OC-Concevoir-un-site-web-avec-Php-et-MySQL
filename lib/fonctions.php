@@ -76,15 +76,17 @@
         // Testons si le fichier a bien été envoyé et s'il n'y a pas des erreurs
         if (isset($file) && $file["error"] == 0) {
 
-            checkSizeFile($file);
+            ensureDirUploadsExist();
 
-            checkExtensionFile($file);
+            $bCanUpload = checkSizeFile($file) 
+                && checkExtensionFile($file);
 
-            $path = checkDirUploadsExist($file);
-            
-            $pathImg = saveFile($file, $path);
+            if($bCanUpload){
+                $path = uploadPath();
+                $pathImg = saveFile($file, $path);
 
-            return $pathImg;
+                return $pathImg;
+            }
 
         }
 
@@ -97,9 +99,11 @@
         if ($file["size"] > 1000000) {
 
             echo "L'envoie n'a pas pu être effectué, erreur ou image trop volumineuse";
-            return;
+            return false;
 
         }
+
+        return true;
 
     }
     
@@ -113,24 +117,25 @@
         if (!in_array($extension, $allowExtension)) {
 
             echo "L'envoie du fichier n'a pas pu être effectué, l'extension {$extension} n'est pas autorisé";
-            return;
+            return false;
         }
+
+        return true;
     }
 
     //Testons, si le dossier uploads est manquant
-    function checkDirUploadsExist($file)
+    function ensureDirUploadsExist()
     {
 
-        $path = dirname(__DIR__).'/uploads/';
-        if (!is_dir($path)) {
-
-            echo "L'envoi n'a pas pu être effectué, le dossier uploads est manquant";
-            return;
-
+        if (!is_dir(uploadPath())) {
+            mkdir(uploadPath());
         }
 
-        return $path;
+    }
 
+    function uploadPath()
+    {
+        return dirname(__DIR__).'/uploads/';
     }
 
     //Valider le fichier et le stocker définitivement

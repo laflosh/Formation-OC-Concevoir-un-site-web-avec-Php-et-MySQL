@@ -1,3 +1,10 @@
+<?php
+    require_once(__DIR__."/lib/fonctions.php");
+    $isExist = checkElementForm();
+    $file = checkFile();
+    $postData = $_POST;
+    $isFile = isset($file);
+?>
 <!DOCTYPE html>
 
 <html>
@@ -21,48 +28,52 @@
 
             <?php require_once(__DIR__."/inclut/header.php");?>
 
-            <?php
-                require_once(__DIR__."/lib/fonctions.php");
-                $isExist = checkElementForm();
-                $file = checkFile();
+            <?php if($isExist && $isFile === true) { ?>
 
-                if($isExist === false) {
-
-                    echo "Il faut un email et un message pour soumettre le formulaire.";
-
-                } else {
-
-                    $postData = $_POST;
-                    
-                    echo "
-                        <h1>Message bien reçu !</h1>
-
-                        <div class=\"card\">
-
-                            <div class=\"card-body\">
-
-                                <h2 class=\"card-title\">Rappel de vos informations</h2>
-
-                                <p class=\"card-text\"><b>Email</b> : {$postData['email']}</p>
-                                <p class=\"card-text\"><b>Message</b> : {$postData['message']}</p>
-
-                            </div>
-
-                        </div>
-                    ";
-                }
-            ?>
-
-            <?php if ($file !== null) : ?>
+                <h1>Message bien reçu !</h1>
 
                 <div class="card">
 
-                    <p class="card-text"><b>Votre image</b> : </p>
-                    <img src="<?php echo $file ?>" title="Image"/>
+                    <div class="card-body">
+
+                        <h2 class="card-title">Rappel de vos informations</h2>
+
+                        <p class="card-text"><b>Email</b> : <?php echo $postData['email'] ?></p>
+                        <p class="card-text"><b>Message</b> : <?php echo $postData['message'] ?></p>
+
+                        <div class="card">
+
+                            <p class="card-text"><b>Votre image</b> : </p>
+                            <img src=<?php echo $file ?> title="Image"/>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            <?php endif; ?>
+
+            <?php } elseif($isExist) { ?>
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h2 class="card-title">Rappel de vos informations</h2>
+
+                        <p class="card-text"><b>Email</b> : <?php echo $postData['email'] ?></p>
+                        <p class="card-text"><b>Message</b> : <?php echo $postData['message'] ?></p>
+
+
+                    </div>
+
+                </div>
+            
+            <?php } else { ?>
+
+                <p>Il faut un email et un message pour soumettre le formulaire.</p>
+
+            <?php } ?>
 
         </div>
 
