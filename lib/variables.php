@@ -33,21 +33,25 @@
         [
             "fullname" => "Emma Dupont",
             "email" => "emma.dupont@test.fr",
+            "password" => "devine",
             "age" => 25,
         ],
         [
             "fullname" => "Lucas Martin",
             "email" => "lucas.martin@test.fr",
+            "password" => "MiamMiam",
             "age" => 29,
         ],
         [
             "fullname" => "Sophia Rodriguez",
             "email" => "sophia.rodriguez@test.fr",
+            "password" => "laCasto28",
             "age" => 33,
         ],
         [
             "fullname" => "Antoine Leroy",
             "email" => "antoine.leroy@test.fr",
+            "password" => "prout",
             "age" => 23,
         ]
     ];

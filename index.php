@@ -19,7 +19,7 @@ require_once(__DIR__."/lib/fonctions.php");
 
     </head>
     
-    <body>
+    <body class="d-flex flex-column min-vh-100">
 
         <div class="container">
 
@@ -31,20 +31,26 @@ require_once(__DIR__."/lib/fonctions.php");
                 Retrouver toutes nos recettes de cuisines.<br />
             </p>
 
+            <!--Formulaire de connexion-->
+            <?php require_once(__DIR__."/_login.php")?>
 
-            <?php foreach(getRecipes($recettes) as $recette) : ?>
-    
-                <article>
+            <?php if(isset($loggedUser)){ ?>
 
-                    <h2> <?php echo $recette["titre"] ?> </h2>
-    
-                    <div> <?php echo $recette["recette"] ?></div>
-                    <i> <?php echo displayAuthor($recette["auteur"] , $users) ?> </i>
+                <?php foreach(getRecipes($recettes) as $recette) { ?>
+        
+                    <article>
 
-                </article>
+                        <h2> <?php echo $recette["titre"] ?> </h2>
+        
+                        <div> <?php echo $recette["recette"] ?></div>
+                        <i> <?php echo displayAuthor($recette["auteur"] , $users) ?> </i>
+
+                    </article>
 
 
-            <?php endforeach?>
+                <?php } ?>
+
+            <?php } ?>
 
         </div>
 
