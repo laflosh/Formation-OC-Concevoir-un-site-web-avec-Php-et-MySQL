@@ -42,7 +42,7 @@ require_once(__DIR__."/lib/variables.php");
     
                 <article>
 
-                    <h2> <?php echo $recette["titre"] ?> </h2>
+                    <h2><a href="_recipes_read.php?id=<?php echo($recette['recipe_id']); ?>"><?php echo($recette['titre']); ?></a></h2>
     
                     <div> <?php echo $recette["recette"] ?></div>
                     <i> <?php echo displayAuthor($recette["auteur"] , $users) ?> </i>
