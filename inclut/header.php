@@ -25,10 +25,14 @@
                     </li>
 
                     <?php if (isset($_SESSION['LOGGED_USER'])) { ?>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="_logout.php">Déconnexion</a>
-                    </li>
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="_recipes_create.php">Ajoutez une recette !</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="_logout.php">Déconnexion</a>
+                        </li>
 
                     <?php } ?>
 
