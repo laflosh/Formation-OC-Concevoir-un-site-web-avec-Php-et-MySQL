@@ -47,12 +47,12 @@ require_once(__DIR__."/lib/variables.php");
                     <div> <?php echo $recette["recette"] ?></div>
                     <i> <?php echo displayAuthor($recette["auteur"] , $users) ?> </i>
 
-                    <?php if (isset($_SESSION['LOGGED_USER']) && $recipe['author'] === $_SESSION['LOGGED_USER']['email']) { ?>
+                    <?php if (isset($_SESSION['LOGGED_USER']) && $recette['auteur'] === $_SESSION['LOGGED_USER']['email']) { ?>
 
                         <ul class="list-group list-group-horizontal">
 
-                            <li class="list-group-item"><a class="link-warning" href="recipes_update.php?id=<?php echo($recipe['recipe_id']); ?>">Editer l'article</a></li>
-                            <li class="list-group-item"><a class="link-danger" href="recipes_delete.php?id=<?php echo($recipe['recipe_id']); ?>">Supprimer l'article</a></li>
+                            <li class="list-group-item"><a class="link-warning" href="_recipes_update.php?id=<?php echo($recette['recipe_id']); ?>">Editer l'article</a></li>
+                            <li class="list-group-item"><a class="link-danger" href="_recipes_delete.php?id=<?php echo($recette['recipe_id']); ?>">Supprimer l'article</a></li>
                             
                         </ul>
 
