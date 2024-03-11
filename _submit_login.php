@@ -1,7 +1,9 @@
 <?php
 session_start();
-require_once(__DIR__ . '/lib/variables.php');
-require_once(__DIR__ . '/lib/fonctions.php');
+require_once(__DIR__."/config/mysql.php");
+require_once(__DIR__."/sql/databaseconnect.php");
+require_once(__DIR__."/lib/fonctions.php");
+require_once(__DIR__."/lib/variables.php");
 
 //Validation du formulaire de connexion
 

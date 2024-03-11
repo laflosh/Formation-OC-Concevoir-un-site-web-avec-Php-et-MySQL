@@ -1,7 +1,10 @@
 <?php
 session_start();
-require_once(__DIR__."/lib/variables.php");
+
+require_once(__DIR__."/config/mysql.php");
+require_once(__DIR__."/sql/databaseconnect.php");
 require_once(__DIR__."/lib/fonctions.php");
+require_once(__DIR__."/lib/variables.php");
 ?>
 <!DOCTYPE html>
 
@@ -35,7 +38,7 @@ require_once(__DIR__."/lib/fonctions.php");
             <!--Formulaire de connexion-->
             <?php require_once(__DIR__."/_login.php")?>
 
-            <?php foreach(getRecipes($recettes) as $recette) { ?>
+            <?php foreach($recettes as $recette) { ?>
     
                 <article>
 
